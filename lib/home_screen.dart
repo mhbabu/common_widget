@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -8,6 +9,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0;
+
+  List<Widget> _pages = [
+    Container(color: Colors.red),
+    Container(color: Colors.green),
+    Container(color: Colors.blue),
+    Container(color: Colors.deepOrange),
+    Container(color: Colors.indigo),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,10 +32,81 @@ class _HomeScreenState extends State<HomeScreen> {
           color: Colors.white,
         ), // 👈 This fixes the arrow color
       ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: [
+      //     BottomNavigationBarItem(
+      //       label: '',
+      //       icon: SvgPicture.asset('assets/images/home-svgrepo-com.svg'),
+      //     ),
+      //     BottomNavigationBarItem(
+      //       label: '',
+      //       icon: SvgPicture.asset('assets/images/home-svgrepo-com.svg'),
+      //     ),
+      //     BottomNavigationBarItem(
+      //       label: '',
+      //       icon: SvgPicture.asset('assets/images/home-svgrepo-com.svg'),
+      //     ),
+      //     BottomNavigationBarItem(
+      //       label: '',
+      //       icon: Container(
+      //         height: 30,
+      //         width: 30,
+      //         decoration: const BoxDecoration(
+      //           image: DecorationImage(
+      //             image: AssetImage('assets/images/home-svgrepo-com.svg'),
+      //           ),
+      //           shape: BoxShape.circle,
+      //         ),
+      //       ),
+      //     ),
+      //   ],
+      // ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        type: BottomNavigationBarType.fixed,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        items: [
+          BottomNavigationBarItem(
+            label: '',
+            icon: SvgPicture.asset('assets/images/home-svgrepo-com.svg'),
+          ),
+          BottomNavigationBarItem(
+            label: '',
+            icon: SvgPicture.asset('assets/images/search-svgrepo-com.svg'),
+          ),
+          BottomNavigationBarItem(
+            label: '',
+            icon: SvgPicture.asset('assets/images/plus-circle-svgrepo-com.svg'),
+          ),
+          BottomNavigationBarItem(
+            label: '',
+            icon: SvgPicture.asset('assets/images/user-svgrepo-com.svg'),
+          ),
+          BottomNavigationBarItem(
+            label: '',
+            icon: Container(
+              height: 30,
+              width: 30,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/profile.jpg'),
+                ),
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(8.0),
-          child: Row(children: [Text('Wiget is ready now...')]),
+          child: _pages[_selectedIndex],
         ),
       ),
     );
