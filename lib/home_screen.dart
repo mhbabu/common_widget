@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_widget/bottom_sheet_screen.dart';
 import 'package:my_widget/navigationbar_screen.dart';
 import 'package:my_widget/step_screen.dart';
 
@@ -19,57 +20,67 @@ class _HomeScreenState extends State<HomeScreen> {
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: const Color.fromARGB(255, 32, 10, 61),
-        iconTheme: const IconThemeData(
-          color: Colors.white,
-        ), // 👈 This fixes the arrow color
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
-
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const StepScreen()),
-                  );
-                },
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.stairs, size: 24),
-                    Text(
-                      'Goto Step Page',
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                  ],
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _buildButton(
+                  context,
+                  icon: Icons.stairs,
+                  label: 'Goto Step Page',
+                  page: const StepScreen(),
                 ),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const NagivationScreen(),
-                    ),
-                  );
-                },
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.stairs, size: 24),
-                    Text(
-                      'Goto Nagigation Page',
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                  ],
+                const SizedBox(height: 12),
+                _buildButton(
+                  context,
+                  icon: Icons.navigation,
+                  label: 'Goto Navigation Page',
+                  page: const NagivationScreen(),
                 ),
-              ),
-            ],
+                const SizedBox(height: 12),
+                _buildButton(
+                  context,
+                  icon: Icons.view_agenda,
+                  label: 'Goto Bottom Sheet Page',
+                  page: const BottomSheetScreen(),
+                ),
+              ],
+            ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildButton(BuildContext context, { required IconData icon, required String label, required Widget page,}) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      elevation: 3,
+      child: TextButton(
+        style: TextButton.styleFrom(
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => page),
+          );
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, size: 24, color: Colors.blue),
+            const SizedBox(width: 8),
+            Text(
+              label,
+              style: const TextStyle(color: Colors.blue, fontSize: 16),
+            ),
+          ],
         ),
       ),
     );
