@@ -24,7 +24,7 @@ class _NagivationScreenState extends State<NagivationScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Common Widget',
+          'Navigation Bottom Bar',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: const Color.fromARGB(255, 32, 10, 61),

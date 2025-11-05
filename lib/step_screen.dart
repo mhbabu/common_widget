@@ -8,11 +8,27 @@ class StepScreen extends StatefulWidget {
 }
 
 class _StepScreenState extends State<StepScreen> {
-
   bool _secureText = true;
   int _currentStep = 0;
   final _emailController = TextEditingController();
+  final _dateController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  //DatePicker
+
+  Future<void> _selectDate() async {
+    DateTime? _picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+    );
+    if (_picked != null) {
+      setState(() {
+        _dateController.text = _picked.toString().split(" ")[0];
+      });
+    }
+  }
 
   List<Step> stepList() => [
     Step(
@@ -22,23 +38,65 @@ class _StepScreenState extends State<StepScreen> {
       content: Column(
         children: [
           TextField(
+            controller: _dateController,
+            readOnly: true,
+            onTap: () {
+              _selectDate();
+            },
+            decoration: InputDecoration(
+              hintText: 'YYYY-MM-DD',
+              label: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Date',
+                    style: TextStyle(color: Colors.grey, fontSize: 16),
+                  ),
+                  Text(
+                    ' *',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.blue),
+              ),
+              border: OutlineInputBorder(),
+              prefixIcon: Icon(Icons.calendar_today_rounded),
+              // suffixIcon: IconButton(
+              //   onPressed: () {
+              //     setState(() {
+              //       _dateController.clear();
+              //     });
+              //   },
+              //   icon: Icon(Icons.clear),
+              // ),
+            ),
+            textInputAction: TextInputAction.next,
+          ),
+          const SizedBox(height: 14),
+          TextField(
             controller: _emailController,
             decoration: InputDecoration(
               hintText: 'Email address',
-              label: RichText(
-                text: const TextSpan(
-                  text: 'Email',
-                  style: TextStyle(color: Colors.grey, fontSize: 16),
-                  children: [
-                    TextSpan(
-                      text: ' *',
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontWeight: FontWeight.bold,
-                      ),
+              label: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Email',
+                    style: TextStyle(color: Colors.grey, fontSize: 16),
+                  ),
+                  Text(
+                    ' *',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               border: OutlineInputBorder(),
               prefixIcon: Icon(Icons.email_outlined),
@@ -115,7 +173,7 @@ class _StepScreenState extends State<StepScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Common Widget',
+          'Stepper Widget',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: const Color.fromARGB(255, 32, 10, 61),
