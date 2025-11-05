@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_widget/bottom_sheet_screen.dart';
+import 'package:my_widget/image_picker_screen.dart';
 import 'package:my_widget/navigationbar_screen.dart';
 import 'package:my_widget/step_screen.dart';
 
@@ -48,6 +49,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: Icons.view_agenda,
                   label: 'Goto Bottom Sheet Page',
                   page: const BottomSheetScreen(),
+                ),
+                const SizedBox(height: 12),
+                _buildButton(
+                  context,
+                  icon: Icons.image,
+                  label: 'Goto Image Picker Page',
+                  page: const ImagePrickerScreen(),
                 ),
               ],
             ),
