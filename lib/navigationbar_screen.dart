@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class NagivationScreen extends StatefulWidget {
+  const NagivationScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<NagivationScreen> createState() => _NagivationScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  /***********************
-    BOTTOM NAVIGATION BAR
-   ***********************/
+class _NagivationScreenState extends State<NagivationScreen> {
   int _selectedIndex = 0;
+
   List<Widget> _pages = [
     Container(color: Colors.red),
     Container(color: Colors.green),
@@ -21,7 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
     Container(color: Colors.indigo),
   ];
 
- 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,10 +32,35 @@ class _HomeScreenState extends State<HomeScreen> {
           color: Colors.white,
         ), // 👈 This fixes the arrow color
       ),
-
-      /*********************************
-       BOTTOM NAVIGATION BAR START HERE
-       *********************************/
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: [
+      //     BottomNavigationBarItem(
+      //       label: '',
+      //       icon: SvgPicture.asset('assets/images/home-svgrepo-com.svg'),
+      //     ),
+      //     BottomNavigationBarItem(
+      //       label: '',
+      //       icon: SvgPicture.asset('assets/images/home-svgrepo-com.svg'),
+      //     ),
+      //     BottomNavigationBarItem(
+      //       label: '',
+      //       icon: SvgPicture.asset('assets/images/home-svgrepo-com.svg'),
+      //     ),
+      //     BottomNavigationBarItem(
+      //       label: '',
+      //       icon: Container(
+      //         height: 30,
+      //         width: 30,
+      //         decoration: const BoxDecoration(
+      //           image: DecorationImage(
+      //             image: AssetImage('assets/images/home-svgrepo-com.svg'),
+      //           ),
+      //           shape: BoxShape.circle,
+      //         ),
+      //       ),
+      //     ),
+      //   ],
+      // ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: (index) {
@@ -80,8 +102,13 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ],
-      )
-      
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: _pages[_selectedIndex],
+        ),
+      ),
     );
   }
 }
