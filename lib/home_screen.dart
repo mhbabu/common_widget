@@ -9,6 +9,7 @@ import 'package:my_widget/image_screen.dart';
 import 'package:my_widget/navigationbar_screen.dart';
 import 'package:my_widget/step_screen.dart';
 import 'package:my_widget/tab_screen.dart';
+import 'package:my_widget/time_picker_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -33,6 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(
+            // physics: const AlwaysScrollableScrollPhysics(),
+            // padding: const EdgeInsets.only(bottom: 50),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -104,6 +107,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: Icons.tab,
                   label: 'Goto Tab Screen',
                   page: const TabScreen(),
+                ),
+                const SizedBox(height: 12),
+                _buildButton(
+                  context,
+                  icon: Icons.punch_clock_rounded,
+                  label: 'Goto Timepicker Screen',
+                  page: const TimePickerScreen(),
                 ),
               ],
             ),
