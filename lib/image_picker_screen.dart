@@ -27,6 +27,21 @@ class _ImagePrickerScreenState extends State<ImagePrickerScreen> {
     }
   }
 
+  Future _pickImageFromCamera() async {
+    final returnedImage = await ImagePicker().pickImage(
+      source: ImageSource.camera,
+    );
+    if (returnedImage != null) {
+      // Check for null
+      setState(() {
+        _selectedImage = File(returnedImage.path);
+      });
+    } else {
+      // User canceled picking
+      print('No image selected');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,9 +77,7 @@ class _ImagePrickerScreenState extends State<ImagePrickerScreen> {
                 height: 50,
                 minWidth: 200,
                 color: const Color(0xff1D1E22),
-                onPressed: () {
-                  print('babu');
-                },
+                onPressed: () => _pickImageFromCamera(),
                 child: const Text(
                   'Pick Image from Camera',
                   style: TextStyle(color: Colors.white),
