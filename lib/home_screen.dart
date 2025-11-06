@@ -8,6 +8,7 @@ import 'package:my_widget/image_picker_screen.dart';
 import 'package:my_widget/image_screen.dart';
 import 'package:my_widget/navigationbar_screen.dart';
 import 'package:my_widget/step_screen.dart';
+import 'package:my_widget/tab_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -96,6 +97,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: Icons.arrow_drop_down,
                   label: 'Goto Dropdown Screen',
                   page: const DropDownScreen(),
+                ),
+                const SizedBox(height: 12),
+                _buildButton(
+                  context,
+                  icon: Icons.tab,
+                  label: 'Goto Tab Screen',
+                  page: const TabScreen(),
                 ),
               ],
             ),
