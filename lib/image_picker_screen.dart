@@ -17,12 +17,10 @@ class _ImagePrickerScreenState extends State<ImagePrickerScreen> {
       source: ImageSource.gallery,
     );
     if (returnedImage != null) {
-      // Check for null
       setState(() {
         _selectedImage = File(returnedImage.path);
       });
     } else {
-      // User canceled picking
       print('No image selected');
     }
   }
@@ -32,12 +30,10 @@ class _ImagePrickerScreenState extends State<ImagePrickerScreen> {
       source: ImageSource.camera,
     );
     if (returnedImage != null) {
-      // Check for null
       setState(() {
         _selectedImage = File(returnedImage.path);
       });
     } else {
-      // User canceled picking
       print('No image selected');
     }
   }
@@ -47,26 +43,30 @@ class _ImagePrickerScreenState extends State<ImagePrickerScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'ImagePrickerScreen',
+          'Image Picker',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: const Color.fromARGB(255, 32, 10, 61),
-        iconTheme: const IconThemeData(
-          color: Colors.white,
-        ), // 👈 This fixes the arrow color
+        iconTheme: const IconThemeData(color: Colors.white),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.close, color: Colors.white),
+            onPressed: () {
+              Navigator.pop(context); // 👈 closes the screen
+            },
+          ),
+        ],
       ),
       body: SafeArea(
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center, // vertically center
-            crossAxisAlignment:
-                CrossAxisAlignment.center, // horizontally center
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               MaterialButton(
                 height: 50,
                 minWidth: 200,
                 color: const Color(0xff1D1E22),
-                onPressed: () => _pickImageFromGallery(),
+                onPressed: _pickImageFromGallery,
                 child: const Text(
                   'Pick Image from Gallery',
                   style: TextStyle(color: Colors.white),
@@ -77,7 +77,7 @@ class _ImagePrickerScreenState extends State<ImagePrickerScreen> {
                 height: 50,
                 minWidth: 200,
                 color: const Color(0xff1D1E22),
-                onPressed: () => _pickImageFromCamera(),
+                onPressed: _pickImageFromCamera,
                 child: const Text(
                   'Pick Image from Camera',
                   style: TextStyle(color: Colors.white),
@@ -85,8 +85,18 @@ class _ImagePrickerScreenState extends State<ImagePrickerScreen> {
               ),
               const SizedBox(height: 14),
               _selectedImage != null
-                  ? Image.file(_selectedImage!)
-                  : Text('Please select an Image'),
+                  ? Column(
+                      children: [
+                        Image.file(_selectedImage!, height: 200),
+                        const SizedBox(height: 10),
+                        ElevatedButton.icon(
+                          onPressed: () => Navigator.pop(context),
+                          icon: const Icon(Icons.check),
+                          label: const Text('Use this Image'),
+                        ),
+                      ],
+                    )
+                  : const Text('Please select an image'),
             ],
           ),
         ),

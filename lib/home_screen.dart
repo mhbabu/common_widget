@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_widget/animated_dialogue_screen.dart';
 import 'package:my_widget/bottom_sheet_screen.dart';
 import 'package:my_widget/image_picker_screen.dart';
 import 'package:my_widget/navigationbar_screen.dart';
@@ -57,6 +58,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   label: 'Goto Image Picker Page',
                   page: const ImagePrickerScreen(),
                 ),
+                const SizedBox(height: 12),
+                _buildButton(
+                  context,
+                  icon: Icons.animation,
+                  label: 'Goto Animated Dialogue',
+                  page: const AnimatedDialogueScreen(),
+                ),
               ],
             ),
           ),
@@ -65,7 +73,12 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildButton(BuildContext context, { required IconData icon, required String label, required Widget page,}) {
+  Widget _buildButton(
+    BuildContext context, {
+    required IconData icon,
+    required String label,
+    required Widget page,
+  }) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       elevation: 3,
