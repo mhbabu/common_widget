@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_widget/home_screen.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({super.key});
@@ -65,7 +66,10 @@ class _DrawerScreenState extends State<DrawerScreen> {
             _buildItem(
               icon: Icons.home_rounded,
               title: 'Home',
-              onTap: () => Navigator.pop(context),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const HomeScreen()),
+              ),
             ),
             _buildItem(
               icon: Icons.notifications_rounded,
