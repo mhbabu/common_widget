@@ -48,14 +48,6 @@ class _ImagePrickerScreenState extends State<ImagePrickerScreen> {
         ),
         backgroundColor: const Color.fromARGB(255, 32, 10, 61),
         iconTheme: const IconThemeData(color: Colors.white),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.close, color: Colors.white),
-            onPressed: () {
-              Navigator.pop(context); // 👈 closes the screen
-            },
-          ),
-        ],
       ),
       body: SafeArea(
         child: Center(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_widget/animated_dialogue_screen.dart';
 import 'package:my_widget/bottom_sheet_screen.dart';
+import 'package:my_widget/dismissable_screen.dart';
 import 'package:my_widget/image_picker_screen.dart';
+import 'package:my_widget/image_screen.dart';
 import 'package:my_widget/navigationbar_screen.dart';
 import 'package:my_widget/step_screen.dart';
 
@@ -64,6 +66,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: Icons.animation,
                   label: 'Goto Animated Dialogue',
                   page: const AnimatedDialogueScreen(),
+                ),
+                const SizedBox(height: 12),
+                _buildButton(
+                  context,
+                  icon: Icons.image_aspect_ratio,
+                  label: 'Goto Images Screen',
+                  page: const ImageScreen(),
+                ),
+                const SizedBox(height: 12),
+                _buildButton(
+                  context,
+                  icon: Icons.image_aspect_ratio,
+                  label: 'Goto Dismissable Screen',
+                  page: const DismissableScreen(),
                 ),
               ],
             ),
