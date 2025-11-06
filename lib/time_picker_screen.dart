@@ -11,7 +11,16 @@ class _TimePickerScreenState extends State<TimePickerScreen> {
   TimeOfDay _timeOfDay = TimeOfDay(hour: 12, minute: 10); // TimeOfDay.now()
 
   Future<void> _selectTime() async {
-    await showTimePicker(initialTime: _timeOfDay, context: context);
+    TimeOfDay? _picked = await showTimePicker(
+      initialTime: _timeOfDay,
+      context: context,
+    );
+
+    if (_picked != null) {
+      setState(() {
+        _timeOfDay = _picked;
+      });
+    }
   }
 
   @override
@@ -32,7 +41,9 @@ class _TimePickerScreenState extends State<TimePickerScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              _timeOfDay.hour.toString() + ':' + _timeOfDay.minute.toString(),
+              _timeOfDay.hour.toString() +
+                  ':' +
+                  _timeOfDay.minute.toString().padLeft(2, '0'),
               style: const TextStyle(fontSize: 20),
             ),
             const SizedBox(height: 20),
