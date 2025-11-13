@@ -6,6 +6,7 @@ import 'package:my_widget/drawer_screen.dart';
 import 'package:my_widget/dropdown_screen.dart';
 import 'package:my_widget/image_picker_screen.dart';
 import 'package:my_widget/image_screen.dart';
+import 'package:my_widget/listview_screen.dart';
 import 'package:my_widget/navigationbar_screen.dart';
 import 'package:my_widget/step_screen.dart';
 import 'package:my_widget/tab_screen.dart';
@@ -114,6 +115,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: Icons.punch_clock_rounded,
                   label: 'Goto Timepicker Screen',
                   page: const TimePickerScreen(),
+                ),
+                _buildButton(
+                  context,
+                  icon: Icons.punch_clock_rounded,
+                  label: 'List View Screen',
+                  page: const ListViewScreen(),
                 ),
               ],
             ),
